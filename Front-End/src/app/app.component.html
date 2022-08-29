@@ -1,0 +1,106 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Gerenciamento de Consultas</li>
+  </ol>
+</nav>
+
+<div class="container">
+  <div class="card-list-consultas">
+    <h5 class="card-header">Lista de Consultas</h5>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome Paciente</th>
+            <th scope="col">CRM Médico</th>
+            <th scope="col">Nome Médico</th>
+            <th scope="col">Data Consulta</th>
+            <th scope="col">Hora Consulta</th>
+            <th scope="col">Sala Consulta</th>
+            <th scope="col">Ações</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let consulta of consultas">
+            <td>{{consulta.id}}</td>
+            <td>{{consulta.nomePaciente}}</td>
+            <td>{{consulta.crmMedico}}</td>
+            <td>{{consulta.nomeMedico}}</td>
+            <td>{{consulta.dataConsulta}}</td>
+            <td>{{consulta.horaConsulta}}</td>
+            <td>{{consulta.salaConsulta}}</td>
+            <td class="flex-container-buttom">
+              <button type="button" class="btn btn-warning btn-sm" (click)="editConsulta(consulta)">Editar</button>
+              <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteConsulta(consulta)">Deletar</button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-add-consulta">
+    <h5 class="card-header">Adicionar/Atualizar Consulta</h5>
+    <div class="card-body">
+      <form id="add-form" (ngSubmit)="f.form.valid && saveConsulta(f)" #f ="ngForm" novalidate>
+        <div class="form-group">
+          <label for="model">Nome Paciente</label>
+          <input type="text" [(ngModel)]="consulta.nomePaciente" id="nome-paciente" #formNome="ngModel" required minlength="3" name="nomePaciente"required class="form-control" [ngClass]="{ 'is-invalid': f.submitted}" placeholder="Digite o nome do Paciente">
+          <div *ngIf="f.submitted" class="invalid-feedback"> Paciente já possui consulta agendada na data informada
+          </div>
+          <div *ngIf="formNome.errors?.['required']" class="erro-detalhes"> Campo obrigatório
+          </div>
+          <div *ngIf="formNome.errors?.['minlength']" class="erro-detalhes"> Informe ao menos 3 caracteres
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="model">CRM Médico</label>
+          <input type="text" [(ngModel)]="consulta.crmMedico" id="CRM-medico" name="crmMedico" #formCRM="ngModel" minlength="13" maxlength="13" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted}" placeholder="Digite o CRM do Médico">
+          <div *ngIf="formCRM.errors?.['required']" class="erro-detalhes"> Campo obrigatório
+          </div>
+          <div *ngIf="formCRM.errors?.['minlength']" class="erro-detalhes"> Informe o CRM no formato (CRM/SP XXXXXX)
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="model">Nome Médico</label>
+          <input type="text" [(ngModel)]="consulta.nomeMedico" id="nome-medico" name="nomeMedico"#formMedico="ngModel" minlength="3" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted}" placeholder="Digite o nome do Médico">
+          <div *ngIf="formMedico.errors?.['required']" class="erro-detalhes"> Campo obrigatório
+          </div>
+          <div *ngIf="formMedico.errors?.['minlength']" class="erro-detalhes"> Informe ao menos 3 caracteres
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="model">Data Consulta</label>
+          <input type="text" [(ngModel)]="consulta.dataConsulta" id="data-consulta" name="dataConsulta"#formData="ngModel" minlength="10" maxlength="10" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted}" placeholder="Digite a data da Consulta (yyyy-MM-dd)">
+          <div *ngIf="f.submitted" class="invalid-feedback"> Consulta já agendada no dia para o paciente informado
+          </div>
+          <div *ngIf="formData.errors?.['required']" class="erro-detalhes"> Campo obrigatório
+          </div>
+          <div *ngIf="formData.errors?.['minlength']" class="erro-detalhes"> Informe a data no modelo (yyyy-MM-dd)
+          </div>
+          <div *ngIf="formData.errors?.['maxlength']" class="erro-detalhes"> Informe a data no modelo (yyyy-MM-dd)
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="model">Hora Consulta</label>
+          <input type="text" [(ngModel)]="consulta.horaConsulta" id="hora-consulta" name="horaConsulta"#formHora="ngModel" minlength="5" maxlength="5" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted}" placeholder="Digite a hora da Consulta (mm:ss)">
+          <div *ngIf="formHora.errors?.['required']" class="erro-detalhes"> Campo obrigatório
+          </div>
+          <div *ngIf="formHora.errors?.['minlength']" class="erro-detalhes"> Informe a hora no formato (mm:ss)
+          </div>
+          <div *ngIf="formData.errors?.['maxlength']" class="erro-detalhes"> Informe a hora no formato (mm:ss)
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="model">Sala Consulta</label>
+          <input type="text" [(ngModel)]="consulta.salaConsulta" id="sala-consulta" name="salaConsulta" #formSala="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted}" placeholder="Digite a sala da Consulta">
+          <div *ngIf="formSala.errors?.['required']" class="erro-detalhes"> Campo obrigatório
+          </div>
+        </div>
+        <button type="submit" [disabled]="formNome.invalid || formData.invalid || formCRM.invalid || formMedico.invalid || formHora.invalid || formSala.invalid " class="btn btn-primary btn-add-consulta">Salvar</button>
+        <button type="reset" class="btn btn-secondary btn-add-consulta" (click)="cleanForm(f)">Cancelar</button>
+        
+      </form>
+    </div>
+  </div>
+</div>

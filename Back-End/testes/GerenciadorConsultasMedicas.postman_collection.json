@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "84663e62-f966-4b47-9fba-18fe115a3829",
+		"name": "GerenciadorConsultasMedicas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22766364"
+	},
+	"item": [
+		{
+			"name": "Validações de tamanho de campo",
+			"item": [
+				{
+					"name": "Informando CRM médico no formato errado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Informando CRM medico no formato errado\"] = responseCode.code === 400\r",
+									"\r",
+									"var response = JSON.parse(responseBody);\r",
+									"\r",
+									"tests[\"Verifica a mensagem de validação do tamanho mínimo para CRM\"] = response.errors[0] === \"CRM do médico informado nos moldes errado. Correto: CRM/SP xxxxxx\";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nomePaciente\": \"Samara Leite Santos\",\r\n        \"crmMedico\": \"CRM/SP 1423\",\r\n        \"nomeMedico\": \"Alvares Cabral\",\r\n        \"dataConsulta\": \"2022-08-18\",\r\n        \"horaConsulta\": \"12:00\",\r\n        \"salaConsulta\": 89\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/cadastro/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cadastro",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastro duplicado de consulta em data repetida para o mesmo paciente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Informando consulta duplicada\"] = responseCode.code === 500\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nomePaciente\": \"Samara Leite Santos\",\r\n        \"crmMedico\": \"CRM/SP 142379\",\r\n        \"nomeMedico\": \"Alvares Cabral\",\r\n        \"dataConsulta\": \"2022-08-18\",\r\n        \"horaConsulta\": \"12:00\",\r\n        \"salaConsulta\": 89\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/cadastro/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cadastro",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validações de Regra de Negócio",
+			"item": [
+				{
+					"name": "Validações de Regra de Negócio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests [\"Verifica a resposta de um cadastro de consulta efetuado com sucesso\"] = responseCode.code === 201;\r",
+									"\r",
+									"var response = JSON.parse(responseBody);\r",
+									"\r",
+									"tests [\"Verifica o ID da viagem\"] = response.data.id !== null;\r",
+									"tests [\"Verifrica o nome do paciente persistido\"] = response.data.nomePaciente === \"João Pereira\";\r",
+									"tests [\"Verifica o CRM do médico persistido\"] = response.data.crmMedico === \"CRM/SP 142379\";\r",
+									"tests [\"Veririca o nome do Médico persistido\"] = response.data.nomeMedico === \"Alvares Cabral\";\r",
+									"tests [\"Verifica a data da consulta persistido\"] = response.data.dataConsulta === \"2022-08-18\";\r",
+									"tests [\"Verifica a hora da consulta persistida\"] = response.data.horaConsulta === \"12:00\";\r",
+									"tests [\"Verifica a sala da Consulta persistida\"] = response.data.salaConsulta === 89;\r",
+									"\r",
+									"tests [\"Verifica a ausência de erros\"] = response.errors.isEmpty;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nomePaciente\": \"João Pereira\",\r\n        \"crmMedico\": \"CRM/SP 142379\",\r\n        \"nomeMedico\": \"Alvares Cabral\",\r\n        \"dataConsulta\": \"2022-08-18\",\r\n        \"horaConsulta\": \"12:00\",\r\n        \"salaConsulta\": 89\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/cadastro/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cadastro",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validações de retorno de End Point ordenados por data e hora",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests [\"Verifica o retorno ordenado por data e hora\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/cadastro/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cadastro",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

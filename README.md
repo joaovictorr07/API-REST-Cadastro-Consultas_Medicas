@@ -1,27 +1,49 @@
-# APIRestHttp
+# API-REST-ful-Cadastro-Consultas_Medicas
+## API developed for testing and studying
+### Front-End files developed in Angular/Cli are in the Master branch
+#### Requirements:
+The proposal of the challenge is the creation of a RESTful API, to manage the schedule of an office
+doctor.
+● Register of Medical Appointments
+● Appointments of Registered Medical Appointments
+Each appointment must contain the following information:
+● Patient Name
+● Doctor's CRM
+● Doctor's Name
+● Data/Time
+● Office No.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
-## Development server
+The following rules must be respected in the flow of registration of medical appointments:
+● The same patient cannot book two appointments on the same day.
+● For error situations, it is necessary that the request response is consistent in
+display a message consistent with the error.
+The query endpoint should return the results sorted by Query Date/Time and
+should allow filtering of all queries for a date. This filter is not mandatory - if not
+all queries must be returned.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+____________________________________________________________________________________________________________________________________________________
 
-## Code scaffolding
+# API-REST-ful-Cadastro-Consultas_Medicas
+## API desenvolvida para teste e estudo
+### Arquivos do Front-End desenvolvido em Angular/Cli estão na branch Master
+#### Requisitos:
+A proposta do desafio é a criação de uma API RESTful, para gerir a agenda de um consultório
+médico.
+● Cadastro das Consultas Médicas
+● Consultas das Consultas Médicas Cadastradas
+Cada marcação de consulta deve conter obrigatoriamente as seguintes informações:
+● Nome do Paciente
+● CRM do Médico
+● Nome do Médico
+● Data/Hora
+● Nº Consultório
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+As seguintes regras devem ser respeitadas no fluxo de cadastro das consultas médicas:
+● O mesmo paciente não pode marcar duas consultas no mesmo dia.
+● Para situações de erro, é necessário que a resposta da requisição seja coerente em
+exibir uma mensagem condizente com o erro.
+O endpoint de consulta deve retornar os resultados ordenados por Data/Hora da Consulta e
+deve permitir filtrar todas consultas para uma data. Esse filtro não é obrigatório - se não for
+fornecido todas as consultas devem ser retornadas.
