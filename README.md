@@ -1,6 +1,5 @@
 # API-REST-ful-Cadastro-Consultas_Medicas
 ## API developed for testing and studying
-### Front-End files developed in Angular/Cli are in the Master branch
 #### Requirements:
 The proposal of the challenge is the creation of a RESTful API, to manage the schedule of an office
 doctor.
@@ -26,7 +25,6 @@ ________________________________________________________________________________
 
 # API-REST-ful-Cadastro-Consultas_Medicas
 ## API desenvolvida para teste e estudo
-### Arquivos do Front-End desenvolvido em Angular/Cli estão na branch Master
 #### Requisitos:
 A proposta do desafio é a criação de uma API RESTful, para gerir a agenda de um consultório
 médico.
