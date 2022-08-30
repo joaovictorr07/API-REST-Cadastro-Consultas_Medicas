@@ -91,11 +91,8 @@ public class CadastroDtoResponse implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cadastro [id = " + this.id + ", Nome Paciente = " + this.nomePaciente + "Nome Médico = " + this.nomeMedico
-				+ "Data Consulta = " + this.dataConsulta + "Hora Consulta" + this.horaConsulta + "Sala Consulta" + this.salaConsulta
-				+ "]";
+		return "Cadastro [id = " + this.id + ", Nome Paciente = " + this.nomePaciente + "Nome Médico = " + this.nomeMedico + "Data Consulta = "
+				+ this.dataConsulta + "Hora Consulta" + this.horaConsulta + "Sala Consulta" + this.salaConsulta + "]";
 	}
-	
-	
 
 }

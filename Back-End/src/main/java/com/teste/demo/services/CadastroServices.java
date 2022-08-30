@@ -60,18 +60,18 @@ public class CadastroServices {
 		return this.cadastroRepository.findById(id).orElse(null);
 	}
 
-	public CadastroEntity update(CadastroDto cadastroDto, Long id) throws NotFoundException  {
+	public CadastroEntity update(CadastroDto cadastroDto, Long id) throws NotFoundException {
 		CadastroEntity cadastroExistente = this.cadastroRepository.findById(id).orElse(null);
-		
+
 		if (cadastroExistente == null) {
 			throw new NotFoundException();
 		} else {
-		cadastroExistente.setNomePaciente(cadastroDto.getNomePaciente());
-		cadastroExistente.setCrmMedico(cadastroDto.getCrmMedico());
-		cadastroExistente.setNomeMedico(cadastroDto.getNomeMedico());
-		cadastroExistente.setDataConsulta(cadastroDto.getDataConsulta());
-		cadastroExistente.setHoraConsulta(cadastroDto.getHoraConsulta());
-		cadastroExistente.setSalaConsulta(cadastroDto.getSalaConsulta());
+			cadastroExistente.setNomePaciente(cadastroDto.getNomePaciente());
+			cadastroExistente.setCrmMedico(cadastroDto.getCrmMedico());
+			cadastroExistente.setNomeMedico(cadastroDto.getNomeMedico());
+			cadastroExistente.setDataConsulta(cadastroDto.getDataConsulta());
+			cadastroExistente.setHoraConsulta(cadastroDto.getHoraConsulta());
+			cadastroExistente.setSalaConsulta(cadastroDto.getSalaConsulta());
 		}
 		return this.cadastroRepository.save(cadastroExistente);
 	}

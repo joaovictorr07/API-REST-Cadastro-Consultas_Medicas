@@ -99,7 +99,8 @@ public class CadastroController {
 
 	@ApiOperation(value = "Atualiza uma consulta médica específica")
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Responsivo<CadastroEntity>> update(@PathVariable("id") Long id, @Valid @RequestBody CadastroDto cadastroDto) throws NotFoundException {
+	public ResponseEntity<Responsivo<CadastroEntity>> update(@PathVariable("id") Long id, @Valid @RequestBody CadastroDto cadastroDto)
+			throws NotFoundException {
 		this.cadastroService.update(cadastroDto, id);
 		Responsivo<CadastroEntity> response = new Responsivo<>();
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);

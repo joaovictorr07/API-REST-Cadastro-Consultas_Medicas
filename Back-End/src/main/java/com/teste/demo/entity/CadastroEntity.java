@@ -36,7 +36,7 @@ public class CadastroEntity implements Serializable {
 	private Date horaConsulta;
 
 	private int salaConsulta;
-	
+
 	public CadastroEntity() {
 
 	}
@@ -137,10 +137,10 @@ public class CadastroEntity implements Serializable {
 	}
 
 	/**
-	 * @param comparing  
+	 * @param comparing
 	 */
 	public static void sort(Comparator<CadastroEntity> comparing) {
-		CadastroEntity.sort(Comparator.comparing(CadastroEntity::getDataConsulta));
- }
+		/* Metódo intencionalmente vazio, usado em Lambda */
+	}
 
 }
