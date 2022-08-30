@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Responsivo<T> {
-	
+
 	private T data;
 	private List<String> errors;
-	
+
 	public T getData() {
 		return data;
 	}
-	
+
 	public void setData(T data) {
 		this.data = data;
 	}
@@ -29,7 +29,5 @@ public class Responsivo<T> {
 
 	public Responsivo() {
 	}
-	
-	
 
 }
