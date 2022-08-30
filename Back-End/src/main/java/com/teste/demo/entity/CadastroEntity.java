@@ -36,6 +36,10 @@ public class CadastroEntity implements Serializable {
 	private Date horaConsulta;
 
 	private int salaConsulta;
+	
+	public CadastroEntity() {
+
+	}
 
 	public CadastroEntity(Long id, String nomePaciente, String crmMedico, String nomeMedico, Date dataConsulta, int salaConsulta) {
 		this.id = id;
@@ -133,7 +137,6 @@ public class CadastroEntity implements Serializable {
 	}
 
 	/**
-	 * @param comparator 
 	 * @param comparing  
 	 */
 	public static void sort(Comparator<CadastroEntity> comparing) {
