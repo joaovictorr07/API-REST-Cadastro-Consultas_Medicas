@@ -9,7 +9,7 @@ public class Responsivo<T> {
 	private List<String> errors;
 
 	public T getData() {
-		return data;
+		return this.data;
 	}
 
 	public void setData(T data) {
@@ -18,16 +18,13 @@ public class Responsivo<T> {
 
 	public List<String> getErrors() {
 		if (this.errors == null) {
-			this.errors = new ArrayList<String>();
+			this.errors = new ArrayList<>();
 		}
-		return errors;
+		return this.errors;
 	}
 
 	public void setErrors(List<String> errors) {
 		this.errors = errors;
-	}
-
-	public Responsivo() {
 	}
 
 }

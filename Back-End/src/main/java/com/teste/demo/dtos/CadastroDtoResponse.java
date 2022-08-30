@@ -1,4 +1,4 @@
-package com.teste.demo.Dtos;
+package com.teste.demo.dtos;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class CadastroDto implements Serializable {
+public class CadastroDtoResponse implements Serializable {
 
 	private static final long serialVersionUID = -8105241933692707649L;
 
@@ -26,12 +26,8 @@ public class CadastroDto implements Serializable {
 
 	private int salaConsulta;
 
-	public CadastroDto() {
-
-	}
-
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -41,7 +37,7 @@ public class CadastroDto implements Serializable {
 	@NotNull(message = "Nome do paciente é uma informação obrigatória")
 	@Length(min = 3, max = 40, message = "Nome do Paciente deve estar entre 3 e 40 caracteres")
 	public String getNomePaciente() {
-		return nomePaciente;
+		return this.nomePaciente;
 	}
 
 	public void setNomePaciente(String nomePaciente) {
@@ -49,9 +45,8 @@ public class CadastroDto implements Serializable {
 	}
 
 	@NotNull(message = "CRM Médico é uma informação obrigatória")
-	@Length(min = 13, max = 13, message = "CRM do médico informado nos moldes errado. Correto: CRM/SP xxxxxx")
 	public String getCrmMedico() {
-		return crmMedico;
+		return this.crmMedico;
 	}
 
 	public void setCrmMedico(String crmMedico) {
@@ -60,25 +55,25 @@ public class CadastroDto implements Serializable {
 
 	@NotNull(message = "Nome do médico é uma informação obrigatória")
 	public String getNomeMedico() {
-		return nomeMedico;
+		return this.nomeMedico;
 	}
 
 	public void setNomeMedico(String nomeMedico) {
 		this.nomeMedico = nomeMedico;
 	}
 
-	@NotNull(message = "Data da consulta é uma informação obrigatória, no formato yyyy-MM-dd")
+	@NotNull(message = "Data da consulta é uma informação obrigatória")
 	public Date getDataConsulta() {
-		return dataConsulta;
+		return this.dataConsulta;
 	}
 
 	public void setDataConsulta(Date dataConsulta) {
 		this.dataConsulta = dataConsulta;
 	}
 
-	@NotNull(message = "Hora da consulta é uma informação obrigatória")
+	@NotNull(message = "Data da consulta é uma informação obrigatória")
 	public Date getHoraConsulta() {
-		return horaConsulta;
+		return this.horaConsulta;
 	}
 
 	public void setHoraConsulta(Date horaConsulta) {
@@ -87,7 +82,7 @@ public class CadastroDto implements Serializable {
 
 	@NotNull(message = "Sala da consulta é uma informação obrigatória")
 	public int getSalaConsulta() {
-		return salaConsulta;
+		return this.salaConsulta;
 	}
 
 	public void setSalaConsulta(int salaConsulta) {
@@ -96,9 +91,11 @@ public class CadastroDto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cadastro [id = " + id + ", Nome Paciente = " + nomePaciente + "Nome Médico = " + nomeMedico
-				+ "Data Consulta = " + dataConsulta + "Hora Consulta" + horaConsulta + "Sala Consulta" + salaConsulta
+		return "Cadastro [id = " + this.id + ", Nome Paciente = " + this.nomePaciente + "Nome Médico = " + this.nomeMedico
+				+ "Data Consulta = " + this.dataConsulta + "Hora Consulta" + this.horaConsulta + "Sala Consulta" + this.salaConsulta
 				+ "]";
 	}
+	
+	
 
 }

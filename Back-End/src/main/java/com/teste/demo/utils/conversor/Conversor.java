@@ -1,9 +1,9 @@
 package com.teste.demo.utils.conversor;
 
-import com.teste.demo.Dtos.CadastroDtoResponse;
+import com.teste.demo.dtos.CadastroDtoResponse;
 import com.teste.demo.entity.CadastroEntity;
 
-public abstract class Conversor {
+public abstract interface Conversor {
 
 	public static CadastroDtoResponse converterCadastrotoCadastroDtoResponse(CadastroEntity cadastroEntity) {
 		CadastroDtoResponse cadastroDtoResponse = new CadastroDtoResponse();

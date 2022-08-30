@@ -1,13 +1,12 @@
 package com.teste.demo.services;
 
-import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
-import com.teste.demo.Dtos.CadastroDto;
-import com.teste.demo.Dtos.CadastroDtoResponse;
+import com.teste.demo.dtos.CadastroDto;
+import com.teste.demo.dtos.CadastroDtoResponse;
 import com.teste.demo.entity.CadastroEntity;
 import com.teste.demo.repository.CadastroRepository;
 import com.teste.demo.utils.conversor.Conversor;
@@ -19,11 +18,11 @@ public class CadastroServices {
 	private CadastroRepository cadastroRepository;
 
 	public List<CadastroEntity> listarCadastros() {
-		return cadastroRepository.findAll();
+		return this.cadastroRepository.findAll();
 	}
 
 	public CadastroEntity salvar(CadastroDto cadastroDto) throws DataIntegrityViolationException {
-		CadastroEntity cadastroEntity = new CadastroEntity();
+		CadastroEntity cadastroEntity = new CadastroEntity(null, null, null, null, null, 0);
 
 		cadastroEntity.setNomePaciente(cadastroDto.getNomePaciente());
 		cadastroEntity.setCrmMedico(cadastroDto.getCrmMedico());
@@ -33,7 +32,7 @@ public class CadastroServices {
 		cadastroEntity.setSalaConsulta(cadastroDto.getSalaConsulta());
 
 		try {
-			cadastroRepository.save(cadastroEntity);
+			this.cadastroRepository.save(cadastroEntity);
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Consulta já agendada no dia para esse paciente");
 		}
@@ -41,38 +40,40 @@ public class CadastroServices {
 
 	}
 
-	public CadastroDtoResponse buscar(Long id) throws IOException, NotFoundException {
-		CadastroEntity cadastroEntity = cadastroRepository.findById(id).orElse(null);
+	public CadastroDtoResponse buscar(Long id) throws NotFoundException {
+		CadastroEntity cadastroEntity = this.cadastroRepository.findById(id).orElse(null);
 
 		if (cadastroEntity == null) {
 			throw new NotFoundException();
 		}
-		CadastroDtoResponse cadastroDtoResponse = Conversor.converterCadastrotoCadastroDtoResponse(cadastroEntity);
-		return cadastroDtoResponse;
+		return Conversor.converterCadastrotoCadastroDtoResponse(cadastroEntity);
 
 	}
 
-	public List<CadastroEntity> Delete(CadastroEntity cadastroEntity) {
-		cadastroRepository.delete(cadastroEntity);
+	public List<CadastroEntity> delete(CadastroEntity cadastroEntity) {
+		this.cadastroRepository.delete(cadastroEntity);
 
-		return cadastroRepository.findAll();
+		return this.cadastroRepository.findAll();
 	}
 
 	public CadastroEntity buscarSemTratativa(Long id) {
-		CadastroEntity cadastroEntity = cadastroRepository.findById(id).orElse(null);
-		return cadastroEntity;
+		return this.cadastroRepository.findById(id).orElse(null);
 	}
 
-	public CadastroEntity update(CadastroDto cadastroDto, Long id) {
-		CadastroEntity cadastroExistente = cadastroRepository.findById(id).orElse(null);
-
+	public CadastroEntity update(CadastroDto cadastroDto, Long id) throws NotFoundException  {
+		CadastroEntity cadastroExistente = this.cadastroRepository.findById(id).orElse(null);
+		
+		if (cadastroExistente == null) {
+			throw new NotFoundException();
+		} else {
 		cadastroExistente.setNomePaciente(cadastroDto.getNomePaciente());
 		cadastroExistente.setCrmMedico(cadastroDto.getCrmMedico());
 		cadastroExistente.setNomeMedico(cadastroDto.getNomeMedico());
 		cadastroExistente.setDataConsulta(cadastroDto.getDataConsulta());
 		cadastroExistente.setHoraConsulta(cadastroDto.getHoraConsulta());
 		cadastroExistente.setSalaConsulta(cadastroDto.getSalaConsulta());
-		return cadastroRepository.save(cadastroExistente);
+		}
+		return this.cadastroRepository.save(cadastroExistente);
 	}
 
 }

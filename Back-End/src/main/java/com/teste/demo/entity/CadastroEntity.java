@@ -37,12 +37,7 @@ public class CadastroEntity implements Serializable {
 
 	private int salaConsulta;
 
-	public CadastroEntity() {
-
-	}
-
-	public CadastroEntity(Long id, String nomePaciente, String crmMedico, String nomeMedico, Date dataConsulta,
-			int salaConsulta) {
+	public CadastroEntity(Long id, String nomePaciente, String crmMedico, String nomeMedico, Date dataConsulta, int salaConsulta) {
 		this.id = id;
 		this.nomePaciente = nomePaciente;
 		this.crmMedico = crmMedico;
@@ -54,7 +49,7 @@ public class CadastroEntity implements Serializable {
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	public Date getDataConsulta() {
-		return dataConsulta;
+		return this.dataConsulta;
 	}
 
 	public void setDataConsulta(Date dataConsulta) {
@@ -63,7 +58,7 @@ public class CadastroEntity implements Serializable {
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	public Date getHoraConsulta() {
-		return horaConsulta;
+		return this.horaConsulta;
 	}
 
 	public void setHoraConsulta(Date horaConsulta) {
@@ -71,7 +66,7 @@ public class CadastroEntity implements Serializable {
 	}
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -80,7 +75,7 @@ public class CadastroEntity implements Serializable {
 
 	@Column(unique = true)
 	public String getNomePaciente() {
-		return nomePaciente;
+		return this.nomePaciente;
 	}
 
 	public void setNomePaciente(String nomePaciente) {
@@ -88,7 +83,7 @@ public class CadastroEntity implements Serializable {
 	}
 
 	public String getCrmMedico() {
-		return crmMedico;
+		return this.crmMedico;
 	}
 
 	public void setCrmMedico(String crmMedico) {
@@ -96,7 +91,7 @@ public class CadastroEntity implements Serializable {
 	}
 
 	public String getNomeMedico() {
-		return nomeMedico;
+		return this.nomeMedico;
 	}
 
 	public void setNomeMedico(String nomeMedico) {
@@ -104,7 +99,7 @@ public class CadastroEntity implements Serializable {
 	}
 
 	public int getSalaConsulta() {
-		return salaConsulta;
+		return this.salaConsulta;
 	}
 
 	public void setSalaConsulta(int salaConsulta) {
@@ -113,14 +108,13 @@ public class CadastroEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cadastro [id = " + id + ", Nome Paciente = " + nomePaciente + "Nome Médico = " + nomeMedico
-				+ "Data Consulta = " + dataConsulta + "Hora Consulta" + horaConsulta + "Sala Consulta = " + salaConsulta
-				+ "]";
+		return "Cadastro [id = " + this.id + ", Nome Paciente = " + this.nomePaciente + "Nome Médico = " + this.nomeMedico + "Data Consulta = "
+				+ this.dataConsulta + "Hora Consulta" + this.horaConsulta + "Sala Consulta = " + this.salaConsulta + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(crmMedico, dataConsulta, horaConsulta, id, nomeMedico, nomePaciente, salaConsulta);
+		return Objects.hash(this.crmMedico, this.dataConsulta, this.horaConsulta, this.id, this.nomeMedico, this.nomePaciente, this.salaConsulta);
 	}
 
 	@Override
@@ -132,14 +126,18 @@ public class CadastroEntity implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		CadastroEntity other = (CadastroEntity) obj;
-		return Objects.equals(crmMedico, other.crmMedico) && Objects.equals(dataConsulta, other.dataConsulta)
-				&& Objects.equals(horaConsulta, other.horaConsulta) && Objects.equals(id, other.id)
-				&& Objects.equals(nomeMedico, other.nomeMedico) && Objects.equals(nomePaciente, other.nomePaciente)
-				&& salaConsulta == other.salaConsulta;
+		return Objects.equals(this.crmMedico, other.crmMedico) && Objects.equals(this.dataConsulta, other.dataConsulta)
+				&& Objects.equals(this.horaConsulta, other.horaConsulta) && Objects.equals(this.id, other.id)
+				&& Objects.equals(this.nomeMedico, other.nomeMedico) && Objects.equals(this.nomePaciente, other.nomePaciente)
+				&& this.salaConsulta == other.salaConsulta;
 	}
 
+	/**
+	 * @param comparator 
+	 * @param comparing  
+	 */
 	public static void sort(Comparator<CadastroEntity> comparing) {
-
-	}
+		CadastroEntity.sort(Comparator.comparing(CadastroEntity::getDataConsulta));
+ }
 
 }
